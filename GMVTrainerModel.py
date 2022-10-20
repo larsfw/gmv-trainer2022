@@ -1,10 +1,11 @@
+import codecs
+import glob
 import os
 import sys
-import glob
-import xml.etree.ElementTree as ET
-import pandas as pd
-import codecs
 import xml.dom.minidom
+import xml.etree.ElementTree as ET
+
+import pandas as pd
 from lxml.etree import parse, tostring
 
 
