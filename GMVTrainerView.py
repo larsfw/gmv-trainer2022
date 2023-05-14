@@ -1,7 +1,10 @@
 import os
 import sys
 
-from PyQt5 import QtGui, QtWidgets, uic
+from PyQt5 import QtGui, QtWidgets, QtCore, uic
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
 
 from GMVTrainerController import TrainerController
 from GMVTrainerModel import TrainerModel
@@ -22,13 +25,16 @@ class TrainerView(QtWidgets.QMainWindow):
     def konfigUI(self):
         # Setze feste Fenstergröße
         self.setFixedSize(800, 590)
-        self.tableWidget_uebersicht.setColumnWidth(0, 30)
-        self.tableWidget_uebersicht.setColumnWidth(1, 400)
-        self.tableWidget_uebersicht.setColumnWidth(2, 85)
-        self.tableWidget_uebersicht.setColumnWidth(3, 110)
-        self.tableWidget_quantis.setColumnWidth(0, 80)
-        self.tableWidget_quantis.setColumnWidth(1, 80)
-        self.tableWidget_quantis.setColumnWidth(2, 20)
+        # Useful column resizing for long student names
+        header = self.tableWidget_uebersicht.horizontalHeader()
+        header.setSectionResizeMode(0, QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(1, QHeaderView.Stretch)
+        header.setSectionResizeMode(2, QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(3, QHeaderView.ResizeToContents)
+        header_quantis = self.tableWidget_quantis.horizontalHeader()
+        header_quantis.setSectionResizeMode(0, QHeaderView.Stretch)
+        header_quantis.setSectionResizeMode(1, QHeaderView.ResizeToContents)
+        header_quantis.setSectionResizeMode(2, QHeaderView.ResizeToContents)
         pixmap = QtGui.QPixmap(self.ui_dir + "/iib_logo_4.png")
         self.label_9.setPixmap(pixmap)
         icon = QtGui.QIcon(self.ui_dir + "/iib_logo_4.png")
